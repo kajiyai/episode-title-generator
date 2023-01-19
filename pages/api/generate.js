@@ -33,7 +33,8 @@ export default async function (req, res) {
       temperature: 0.8,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
-    console.log("abc:", completion.data.choices[0].text);
+    // 出力の確認
+    // console.log("abc:", completion.data.choices[0].text);
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -53,7 +54,8 @@ export default async function (req, res) {
 function generatePrompt(manga) {
   const capitalizedManga =
     manga[0].toUpperCase() + manga.slice(1).toLowerCase();
-  return `I want you to act as a fancy manga title generator.
-I will type keywords via space and you will reply with a fancy manga title including my keyword in japanese only.
-Please include my keywords that is ${capitalizedManga}.`;
+  return `
+  鍵括弧なしで出力して
+  次のキーワードを入れておもしろい漫画のタイトルを生成してください
+   ${capitalizedManga}`;
 }
