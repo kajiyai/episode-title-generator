@@ -49,6 +49,7 @@ export default function Home() {
   // タイトル生成ボタンを押した後
   async function onSubmit(event) {
     event.preventDefault();
+    let result = null;
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -66,18 +67,8 @@ export default function Home() {
         );
       }
 
-      // 3つのタイトルをそれぞれ定数に格納 data.resultが中身 整形してjsonDataに渡す
-      // const jsonData = MakeJson({ str: data.result });
-      console.log(data.result);
-      console.log(data);
-      console.log(result);
-      const jsonString = '{"result":' + data.result.slice(data.result.indexOf("{")) + '}';
-      const res = JSON.parse(jsonString);
-      setResult(res);
+      setResult(data.result);
       setMangaInput("");
-      console.log(data.result);
-      console.log(data);
-      console.log(result);
 
     } catch (error) {
       // Consider implementing your own error handling logic here
@@ -86,23 +77,25 @@ export default function Home() {
     }
   }
 
-  if (result !== undefined) {
-    const jsonString = '{"result":' + result.slice(result.indexOf("{")) + '}';
-    const res = JSON.parse(jsonString);
-    setResult(res);
-    setMangaInput("");
-    console.log("jsonString:", jsonString)
-    console.log("result:", result)
-    console.log("res:", res)
-  }
-
-
-
-
   // strings for twitter
+  const tweet_text = `私が作る漫画のタイトルは${result} です。`;
   // const tweet_text1 = `私が作る漫画のタイトルは${result.first} です。`;
   // const tweet_text2 = `私が作る漫画のタイトルは${result.second} です。`;
   // const tweet_text3 = `私が作る漫画のタイトルは${result.third} です。`;
+
+  console.log("result:", result)
+
+
+  // str2json2strを試みる
+  if (result !== undefined) {
+    const jsonString1 = '{"result":' + result.slice(result.indexOf("{")) + '}';
+    const jsonString2 = result.slice(result.indexOf("{"));
+    const res = JSON.parse(jsonString2);
+    console.log("jsonString1:", jsonString1)
+    console.log("jsonString2:", jsonString2)
+    console.log("res:", res)
+  }
+
 
 
   return (
@@ -144,10 +137,10 @@ export default function Home() {
       </Flex >
       {/* 結果を表示するエリア */}
       <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
-        {/* {result.first} */}
-        {/* <ResultCards result={result.first} tweet={tweet_text1}></ResultCards>
-        <ResultCards result={result.second} tweet={tweet_text2}></ResultCards>
-        <ResultCards result={result.third} tweet={tweet_text3}></ResultCards> */}
+
+        <ResultCards result={result} tweet={tweet_text}></ResultCards>
+        <ResultCards result={result} tweet={tweet_text}></ResultCards>
+        <ResultCards result={result} tweet={tweet_text}></ResultCards>
       </Flex>
     </>
   );
