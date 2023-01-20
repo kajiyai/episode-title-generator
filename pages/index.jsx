@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import { Header, ShareButton, ResultCards } from "../components/index.js"
-import { Flex, Heading, Input, useColorMode, useColorModeValue, Center, Image } from "@chakra-ui/react";
+import { Flex, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
 
 
 export default function Home() {
@@ -37,6 +37,44 @@ export default function Home() {
       alert(error.message);
     }
   }
+
+  // 生成した画像のurlを格納する変数を定義
+  let img_url;
+
+  // 画像生成ボタンを押した後
+  const generateImage = async () => {
+    try {
+      const response = await fetch("/api/generateImage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
+        body: JSON.stringify({ que: res.first }),
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        throw (
+          data.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
+      }
+      console.log("response.data:", response.data);
+      console.log("response.data.data[0].url:", response.data.data[0].url);
+      // urlを代入
+      img_url = response.data.data[0].url;
+    } catch (error) {
+      // Consider implementing your own error handling logic here
+      console.error("通信に失敗したよ", error);
+      alert(error.message);
+    }
+  }
+
+  //img_urlの呼び出し
+  (async () => {
+    console.log("img_url", img_url);
+  })();
+
 
 
   // 変数resをjson形式で定義
@@ -85,6 +123,15 @@ export default function Home() {
             />
             <Input type="submit" mb={6} background="pink" value="タイトルを生成" color="white" />
           </form>
+          <form onSubmit={generateImage}>
+            <Button
+              colorScheme="blue"
+              type="submit"
+              value={res.first}>
+              res.firstの画像生成
+            </Button>
+          </form>
+          {/* {img_url} */}
         </Flex>
       </Flex >
       {/* 結果を表示するエリア */}

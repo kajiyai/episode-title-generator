@@ -18,11 +18,11 @@ export default async function (req, res) {
     return;
   }
 
-  const manga = req.body.manga || "";
-  if (manga.trim().length === 0) {
+  const que = req.body.que || "";
+  if (que.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid manga",
+        message: "Please enter a valid query",
       },
     });
     return;
@@ -30,11 +30,14 @@ export default async function (req, res) {
 
   try {
     const response = await openai.createImage({
-      prompt: "a white siamese cat",
+      prompt: que + "as a comic style",
       n: 1,
-      size: "256x256",
+      size: "512x512",
     });
-    console.log(response.data.data[0].url);
+    console.log("que:", que);
+    console.log("response.data:", response.data);
+    // index.jsxへ返す内容
+    res.status(200).json({ result: response.data });
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
