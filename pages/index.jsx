@@ -1,57 +1,20 @@
 import Head from "next/head";
 import { useState } from "react";
-import { Ogp, ShareButton, ResultCards } from "../components/index.js"
-import {
-  Button,
-  Flex,
-  flexbox,
-  Heading,
-  Input,
-  useColorMode,
-  useColorModeValue,
-  Center,
-  Image,
-  Wrap,
-  WrapItem,
-  VStack,
-  FormLabel,
-  password,
-  handleClick,
-  Box,
-  Kbd,
-  Spinner,
-  Text,
-  Spacer,
-  Badge,
-  Card, CardHeader, CardBody, CardFooter
-} from "@chakra-ui/react";
-
-// テキスト形式のjsonをクリーンアップしてjson形式に変更する関数
-const MakeJson = ({ str }) => {
-  const [jsonData, setJsonData] = useState({});
-  if (str !== undefined) {
-    const jsonString = str.slice(str.indexOf("{"));
-    try {
-      const res = JSON.parse(jsonString);
-      setJsonData(res);
-    } catch (e) {
-      console.error("Invalid JSON format");
-    }
-  }
-  return jsonData;
-}
+import { Header, ShareButton, ResultCards } from "../components/index.js"
+import { Flex, Heading, Input, useColorMode, useColorModeValue, Center, Image } from "@chakra-ui/react";
 
 
 export default function Home() {
+  // useStateを使う.APIの返り値
   const [mangaInput, setMangaInput] = useState("");
   const [result, setResult] = useState();
 
   // タイトル生成ボタンを押した後
-  async function onSubmit(event) {
+  async function generateTitle(event) {
     event.preventDefault();
     let result = null;
     try {
-      const response = await fetch("/api/generate", {
+      const response = await fetch("/api/generateText", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,10 +29,8 @@ export default function Home() {
           new Error(`Request failed with status ${response.status}`)
         );
       }
-
       setResult(data.result);
       setMangaInput("");
-
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -77,49 +38,40 @@ export default function Home() {
     }
   }
 
-  // strings for twitter
-  const tweet_text = `私が作る漫画のタイトルは${result} です。`;
-  // const tweet_text1 = `私が作る漫画のタイトルは${result.first} です。`;
-  // const tweet_text2 = `私が作る漫画のタイトルは${result.second} です。`;
-  // const tweet_text3 = `私が作る漫画のタイトルは${result.third} です。`;
 
-  console.log("result:", result)
+  // 変数resをjson形式で定義
+  let res = {};
+  res["first"] = "";
+  res["second"] = "";
+  res["third"] = "";
 
-
-  // str2json2strを試みる
+  // 変数resにAPIの返り値resultを代入する
   if (result !== undefined) {
     const jsonString1 = '{"result":' + result.slice(result.indexOf("{")) + '}';
     const jsonString2 = result.slice(result.indexOf("{"));
-    const res = JSON.parse(jsonString2);
-    console.log("jsonString1:", jsonString1)
-    console.log("jsonString2:", jsonString2)
-    console.log("res:", res)
+    // 変数resの上書き
+    res = JSON.parse(jsonString2);
   }
 
+  // 変数tweet_textをjson形式で定義
+  let tweet_text = {};
+  tweet_text["first"] = `私が作る漫画のタイトルは「${res.first}」です。`;
+  tweet_text["second"] = `私が作る漫画のタイトルは「${res.second}」です。`;
+  tweet_text["third"] = `私が作る漫画のタイトルは「${res.third}」です。`;
 
 
   return (
     <>
-      <Head >
-        <title>OpenAI Quickstart</title>
-        <meta property="og:title" content="Manga-Title-Generator" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://manga-title-generator.vercel.app/" />
-        <meta property="og:image" content="../public/img/idea.jpg" />
-        <meta property="og:site_name" content="Manga-Title-Generator" />
-        <meta property="og:description" content="You can generate unique manga title!! This fits Twitter." />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
-
+      {/* headタグ内の設定 */}
+      <Header></Header>
+      {/* トップページ.タイトルと入力画面 */}
       <Flex height="90vh" align="center" justify="center" background="white">
         <Flex direction="column" background="gray.100" p={12} rounded={6} mb={3} color="black">
-
           <Center bg='gray.200' w='100%' p={8} rounded={6} mb={6}>
             <Image src="/img/top.jpg" borderRadius="full" boxSize="200px" alt="picture of title generator" />
           </Center>
-
           <Heading mb={8}>Manga Title Generater</Heading>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={generateTitle}>
             <Input
               type="text"
               name="manga"
@@ -137,10 +89,9 @@ export default function Home() {
       </Flex >
       {/* 結果を表示するエリア */}
       <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
-
-        <ResultCards result={result} tweet={tweet_text}></ResultCards>
-        <ResultCards result={result} tweet={tweet_text}></ResultCards>
-        <ResultCards result={result} tweet={tweet_text}></ResultCards>
+        <ResultCards MT={res.first} tweet={tweet_text.first}></ResultCards>
+        <ResultCards MT={res.second} tweet={tweet_text.second}></ResultCards>
+        <ResultCards MT={res.third} tweet={tweet_text.third}></ResultCards>
       </Flex>
     </>
   );
