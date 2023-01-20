@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import { Ogp } from "../components/index.js"
-import { TwitterShareButton, FacebookShareButton, LineShareButton, HatenaShareButton, TwitterIcon, FacebookIcon, LineIcon, HatenaIcon } from "react-share";
+import { Ogp, ShareButton, ResultCards } from "../components/index.js"
 import {
   Button,
   Flex,
@@ -23,14 +22,31 @@ import {
   Spinner,
   Text,
   Spacer,
-  Badge
+  Badge,
+  Card, CardHeader, CardBody, CardFooter
 } from "@chakra-ui/react";
+
+// テキスト形式のjsonをクリーンアップしてjson形式に変更する関数
+const MakeJson = ({ str }) => {
+  const [jsonData, setJsonData] = useState({});
+  if (str !== undefined) {
+    const jsonString = str.slice(str.indexOf("{"));
+    try {
+      const res = JSON.parse(jsonString);
+      setJsonData(res);
+    } catch (e) {
+      console.error("Invalid JSON format");
+    }
+  }
+  return jsonData;
+}
 
 
 export default function Home() {
   const [mangaInput, setMangaInput] = useState("");
   const [result, setResult] = useState();
 
+  // タイトル生成ボタンを押した後
   async function onSubmit(event) {
     event.preventDefault();
     try {
@@ -50,8 +66,19 @@ export default function Home() {
         );
       }
 
-      setResult(data.result);
+      // 3つのタイトルをそれぞれ定数に格納 data.resultが中身 整形してjsonDataに渡す
+      // const jsonData = MakeJson({ str: data.result });
+      console.log(data.result);
+      console.log(data);
+      console.log(result);
+      const jsonString = '{"result":' + data.result.slice(data.result.indexOf("{")) + '}';
+      const res = JSON.parse(jsonString);
+      setResult(res);
       setMangaInput("");
+      console.log(data.result);
+      console.log(data);
+      console.log(result);
+
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -59,22 +86,27 @@ export default function Home() {
     }
   }
 
+  if (result !== undefined) {
+    const jsonString = '{"result":' + result.slice(result.indexOf("{")) + '}';
+    const res = JSON.parse(jsonString);
+    setResult(res);
+    setMangaInput("");
+    console.log("jsonString:", jsonString)
+    console.log("result:", result)
+    console.log("res:", res)
+  }
+
+
+
+
   // strings for twitter
-  const tweet_text = `私の漫画のタイトルは${result} です。`;
+  // const tweet_text1 = `私が作る漫画のタイトルは${result.first} です。`;
+  // const tweet_text2 = `私が作る漫画のタイトルは${result.second} です。`;
+  // const tweet_text3 = `私が作る漫画のタイトルは${result.third} です。`;
 
-  // Stateの管理
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleClick = () => {
-    console.log({ name, password });
-    setName("");
-    setPassword("");
-  };
 
   return (
-    <div>
-      {/* <ogp /> */}
+    <>
       <Head >
         <title>OpenAI Quickstart</title>
         <meta property="og:title" content="Manga-Title-Generator" />
@@ -85,46 +117,12 @@ export default function Home() {
         <meta property="og:description" content="You can generate unique manga title!! This fits Twitter." />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      {/*
-      <VStack>
-        <VStack w="30vw">
-          <FormLabel htmlFor="name">First name</FormLabel>
-          <Input
-            id="name"
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
 
-          <FormLabel htmlFor="password">Password</FormLabel>
-          <Input
-            id="password"
-            placeholder="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      <Flex height="90vh" align="center" justify="center" background="white">
+        <Flex direction="column" background="gray.100" p={12} rounded={6} mb={3} color="black">
 
-          <Button mt={4} colorScheme="teal" onClick={handleClick}>
-            Submit
-          </Button>
-
-          <TwitterShareButton
-            url={"https://manga-title-generator.vercel.app/"}
-            title={tweet_text}
-            hashtags={["openai", "mtg", "クソアプリ"]}
-          >
-            <TwitterIcon size={30} round={true} />
-          </TwitterShareButton>
-        </VStack>
-      </VStack> */}
-
-      <Flex height="100vh" align="center" justify="center">
-
-        <Flex direction="column" background="gray.100" p={12} rounded={6}>
-
-          <Center bg='gray.200' w='100%' p={8} color='white' rounded={6} mb={6}>
-            <Image src="/img/idea.jpg" borderRadius="full" boxSize="200px" alt="picture of title generator" />
+          <Center bg='gray.200' w='100%' p={8} rounded={6} mb={6}>
+            <Image src="/img/top.jpg" borderRadius="full" boxSize="200px" alt="picture of title generator" />
           </Center>
 
           <Heading mb={8}>Manga Title Generater</Heading>
@@ -132,36 +130,25 @@ export default function Home() {
             <Input
               type="text"
               name="manga"
-              placeholder="キーワードを入力　(例)海賊"
+              placeholder="キーワードを入力"
               value={mangaInput}
               variant="filled"
               onChange={(e) => setMangaInput(e.target.value)}
               mb={6}
-              background="white"
+              // プレースホルダーが見えない！後々に要確認！！
+              background="gray.50"
             />
-            <Input type="submit" mb={6} background="pink" value="タイトルを生成" />
+            <Input type="submit" mb={6} background="pink" value="タイトルを生成" color="white" />
           </form>
-
-          <Center bg='navy' w='100%' p={4} color='white' rounded={6}>
-            <Text fontSize="3xl">{result}</Text>
-          </Center>
-
-          <div>
-            {/* <FacebookShareButton url="https://manga-title-generator.vercel.app/" quote="Manga-Title-Generator">
-            <FacebookIcon size={30} round={true} />
-          </FacebookShareButton>
-
-          <LineShareButton url="https://manga-title-generator.vercel.app/" title="Manga-Title-Generator">
-            <LineIcon size={30} round={true} />
-          </LineShareButton>
-
-          <HatenaShareButton url="https://manga-title-generator.vercel.app/" title="Manga-Title-Generator">
-            <HatenaIcon size={30} round={true} />
-          </HatenaShareButton> */}
-          </div>
         </Flex>
-
+      </Flex >
+      {/* 結果を表示するエリア */}
+      <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
+        {/* {result.first} */}
+        {/* <ResultCards result={result.first} tweet={tweet_text1}></ResultCards>
+        <ResultCards result={result.second} tweet={tweet_text2}></ResultCards>
+        <ResultCards result={result.third} tweet={tweet_text3}></ResultCards> */}
       </Flex>
-    </div>
+    </>
   );
 }

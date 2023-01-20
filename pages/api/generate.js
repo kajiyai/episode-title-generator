@@ -31,10 +31,11 @@ export default async function (req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(manga),
       temperature: 0.8,
+      max_tokens: 150,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
     // 出力の確認
-    // console.log("abc:", completion.data.choices[0].text);
+    console.log("resultに入っているcompletion.dataの中身::", completion.data);
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -54,8 +55,7 @@ export default async function (req, res) {
 function generatePrompt(manga) {
   const capitalizedManga =
     manga[0].toUpperCase() + manga.slice(1).toLowerCase();
-  return `
-  鍵括弧なしで出力して
-  次のキーワードを入れておもしろい漫画のタイトルを生成してください
+  return `次のキーワードを含んだ売れそうな漫画のタイトルを3つ生成して、次の形式のみ返してください
+  {"first": ,"second": ,"third": }
    ${capitalizedManga}`;
 }
