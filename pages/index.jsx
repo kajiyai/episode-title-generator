@@ -42,27 +42,37 @@ export default function Home() {
   let img_url;
 
   // 画像生成ボタンを押した後
-  const generateImage = async () => {
+  const generateImage = async (event) => {
+    event.preventDefault();
     try {
+      console.log('a')
       const response = await fetch("/api/generateImage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
-        body: JSON.stringify({ que: res.first }),
+        body: JSON.stringify({ que: "逆立ちをする猫と一輪車に乗るトラ" }),
       });
+      console.log('b')
       const data = await response.json();
+      console.log('c')
       if (response.status !== 200) {
         throw (
           data.error ||
           new Error(`Request failed with status ${response.status}`)
         );
       }
-      console.log("response.data:", response.data);
-      console.log("response.data.data[0].url:", response.data.data[0].url);
+      console.log("response.status", response.status)
+      console.log("response", response);
+      console.log("data", data);
+      console.log("data.result[0].url", data.result[0].url);
+      console.log("response.data", response.data);
+      console.log("d")
+
+      // console.log("response.data.data[0].url:", response.data.data[0].url);
       // urlを代入
-      img_url = response.data.data[0].url;
+      img_url = data.result[0].url;
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error("通信に失敗したよ", error);
@@ -71,9 +81,9 @@ export default function Home() {
   }
 
   //img_urlの呼び出し
-  (async () => {
-    console.log("img_url", img_url);
-  })();
+  // (async () => {
+  //   console.log("img_url", img_url);
+  // })();
 
 
 
@@ -131,9 +141,9 @@ export default function Home() {
               res.firstの画像生成
             </Button>
           </form>
-          {/* {img_url} */}
         </Flex>
       </Flex >
+      <Image src={img_url} />
       {/* 結果を表示するエリア */}
       <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
         <ResultCards MT={res.first} tweet={tweet_text.first}></ResultCards>

@@ -29,21 +29,32 @@ export default async function (req, res) {
   }
 
   try {
+    console.log("a");
+    // 画像の生成
     const response = await openai.createImage({
-      prompt: que + "as a comic style",
+      prompt: que,
       n: 1,
-      size: "512x512",
+      size: "256x256",
     });
+    // API通信用
+    // const response = "dummy text";
+    console.log("b");
     console.log("que:", que);
     console.log("response.data:", response.data);
+    console.log("c");
     // index.jsxへ返す内容
-    res.status(200).json({ result: response.data });
+    res.status(200).json({ result: response.data.data });
+    console.log("d");
   } catch (error) {
     if (error.response) {
+      console.log("e");
       console.log(error.response.status);
+      console.log("f");
       console.log(error.response.data);
+      console.log("g");
     } else {
       console.log(error.message);
+      console.log("h");
     }
   }
 }
