@@ -10,7 +10,7 @@ const ResultCards = (props) => {
           <Image
             objectFit='cover'
             src={props.url}
-            alt='Chakra UI'
+            alt='画像を作ってね！'
           />
           <form onSubmit={props.GI}>
             <Button
