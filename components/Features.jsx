@@ -9,7 +9,8 @@ import {
     StackDivider,
     Icon,
     useColorModeValue,
-    Input
+    Input,
+    Box,
 } from '@chakra-ui/react';
 import {
     IoAnalyticsSharp,
@@ -50,12 +51,11 @@ export default function Features(props) {
                         p={2}
                         alignSelf={'flex-start'}
                         rounded={'md'}>
-                        New App
+                        OPENAI
                     </Text>
                     <Heading>MTG</Heading>
                     <Text color={'gray.500'} fontSize={'lg'}>
-                        You can generate exciting title for manga.
-                        Also, You can generate picture on the cover.
+                        あなただけの漫画のタイトルと表紙を生成しよう!!
                     </Text>
                     <Stack
                         spacing={4}
@@ -81,7 +81,7 @@ export default function Features(props) {
                                 <Icon as={IoSearchSharp} color={'purple.500'} w={5} h={5} />
                             }
                             iconBg={useColorModeValue('purple.100', 'purple.900')}
-                            text={'input your keywords'}
+                            text={'キーワードを入力しよう！'}
                         />
 
                         {/* テキストボックス */}
@@ -89,7 +89,7 @@ export default function Features(props) {
                             <Input
                                 type="text"
                                 name="manga"
-                                placeholder="キーワードを入力"
+                                placeholder="例) 犬"
                                 value={props.mi}
                                 variant="filled"
                                 onChange={(e) => props.smi(e.target.value)}
@@ -103,14 +103,23 @@ export default function Features(props) {
                     </Stack>
                 </Stack>
                 <Flex>
-                    <Image
+                    <Box bg='gray.300' width='100%' rounded={'md'} alignItems='center' justifyContent='center' color='black'>
+                        <Stack spacing={3} p={6}>
+                            <Text fontSize='3xl'>使い方</Text>
+                            <Text fontSize='lg'>漫画のタイトルと画像をAIと共につくります</Text>
+                            <Text fontSize='md'>キーワードを入力してタイトル生成ボタンを押すと、イケてる(?)漫画のタイトルが生成されます</Text>
+                            <Text fontSize='md'>プロンプト生成ボタンを押すと、画像生成用の呪文が生成されます</Text>
+                            <Text fontSize='md'>画像生成ボタンを押すと、タイトルに合った(?)画像が生成されます</Text>
+                        </Stack>
+                    </Box>
+                    {/* <Image
                         rounded={'md'}
                         alt={'feature image'}
                         src={
                             'https://images.unsplash.com/photo-1548827752-6301e20b3be0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fCVFNiVCQyVBQiVFNyU5NCVCQnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
                         }
                         objectFit={'cover'}
-                    />
+                    /> */}
                 </Flex>
             </SimpleGrid>
         </Container>

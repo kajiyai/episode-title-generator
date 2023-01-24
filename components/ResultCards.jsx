@@ -28,39 +28,39 @@ export default function ResultCards(props) {
       rounded={'lg'}
       pos={'relative'}
       zIndex={1}>
-      <Box
-        rounded={'lg'}
-        mt={-12}
-        pos={'relative'}
-        height={'230px'}
-        _after={{
-          transition: 'all .3s ease',
-          content: '""',
-          w: 'full',
-          h: 'full',
-          pos: 'absolute',
-          top: 5,
-          left: 0,
-          backgroundImage: `url(${props.url})`,
-          filter: 'blur(15px)',
-          zIndex: -1,
-        }}
-        _groupHover={{
-          _after: {
-            filter: 'blur(20px)',
-          },
-        }}>
-        <Image
-          rounded={'lg'}
-          height={256}
-          width={256}
-          objectFit={'cover'}
-          src={props.url}
-          fallbackSrc='https://via.placeholder.com/256'
-        />
-      </Box>
       <Stack pt={10} align={'center'}>
-        <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
+        <Box
+          rounded={'lg'}
+          mt={-12}
+          pos={'relative'}
+          height={'230px'}
+          _after={{
+            transition: 'all .3s ease',
+            content: '""',
+            w: 'full',
+            h: 'full',
+            pos: 'absolute',
+            top: 5,
+            left: 0,
+            backgroundImage: `url(${props.url})`,
+            filter: 'blur(15px)',
+            zIndex: -1,
+          }}
+          _groupHover={{
+            _after: {
+              filter: 'blur(20px)',
+            },
+          }}>
+          <Image
+            rounded={'lg'}
+            height={256}
+            width={256}
+            objectFit={'cover'}
+            src={props.url}
+            fallbackSrc='https://via.placeholder.com/256'
+          />
+        </Box>
+        <Text py={4} color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
           {props.que}
         </Text>
         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
@@ -71,14 +71,25 @@ export default function ResultCards(props) {
           spacing={4}
           align='center'
         >
-          <form onSubmit={props.gi}>
+          <form onSubmit={props.gp}>
             <Button
               colorScheme="blue"
               type="submit"
               value={props.mt}>
+              プロンプト生成
+            </Button>
+          </form>
+          <form onSubmit={props.gi}>
+            <Button
+              colorScheme="blue"
+              type="submit"
+              value={props.p}>
               画像生成
             </Button>
           </form>
+          <Text>
+            {props.p}
+          </Text>
           <TwitterShareButton
             url={"https://manga-title-generator-4vwn.vercel.app/"}
             title={props.tweet}
