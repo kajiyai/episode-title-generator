@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import { Header, ShareButton, ResultCards } from "../components/index.js"
+import { Header, ShareButton, ResultCards, Features } from "../components/index.js"
 import { Flex, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
 
 
@@ -220,15 +220,23 @@ export default function Home() {
   console.log(res);
   console.log("a4:");
 
-
+  let cards = [
+    { gi: generateImage(1), mt: res.first, url: img_url_1, tweet: tweet_text.first, que: mangaInput },
+    { gi: generateImage(2), mt: res.second, url: img_url_2, tweet: tweet_text.second, que: mangaInput },
+    { gi: generateImage(3), mt: res.third, url: img_url_3, tweet: tweet_text.third, que: mangaInput }
+  ]
 
 
   return (
     <>
       {/* headタグ内の設定 */}
       <Header></Header>
-      {/* トップページ.タイトルと入力画面 */}
-      <Flex height="90vh" align="center" justify="center" background="white">
+      {/* Features */}
+      <Features gt={generateTitle} mi={mangaInput} smi={setMangaInput}></Features>
+
+      {/* 旧:トップページ.タイトルと入力画面 */}
+
+      {/* <Flex height="90vh" align="center" justify="center" background="white">
         <Flex direction="column" background="gray.100" p={12} rounded={6} mb={3} color="black">
           <Center bg='gray.200' w='100%' p={8} rounded={6} mb={6}>
             <Image src="/img/top.jpg" borderRadius="full" boxSize="200px" alt="picture of title generator" />
@@ -249,14 +257,15 @@ export default function Home() {
             <Input type="submit" mb={6} background="pink" value="タイトルを生成" color="white" />
           </form>
         </Flex>
-      </Flex >
+      </Flex > */}
+
+
       {/* <p>画像のurl:{img_url}</p> */}
       {/* 結果を表示するエリア */}
       <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
-        <ResultCards GI={generateImage(1)} MT={res.first} url={img_url_1} tweet={tweet_text.first}></ResultCards>
-        <ResultCards GI={generateImage(2)} MT={res.second} url={img_url_2} tweet={tweet_text.second}></ResultCards>
-        <ResultCards GI={generateImage(3)} MT={res.third} url={img_url_3} tweet={tweet_text.third}></ResultCards>
-      </Flex>
+        {cards.map(card => (
+          <ResultCards gi={card.gi} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
+        ))} </Flex>
     </>
   );
 }
