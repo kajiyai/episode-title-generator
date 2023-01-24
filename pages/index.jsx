@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
-import { Header, ShareButton, ResultCards, Features } from "../components/index.js"
-import { Flex, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
+import { Header, ShareButton, ResultCards, Features, Footer } from "../components/index.js"
+import { Box, VStack, Container, Wrap, WrapItem, Grid, Flex, Stack, HStack, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
 
 
 export default function Home() {
@@ -233,39 +233,26 @@ export default function Home() {
       <Header></Header>
       {/* Features */}
       <Features gt={generateTitle} mi={mangaInput} smi={setMangaInput}></Features>
-
-      {/* 旧:トップページ.タイトルと入力画面 */}
-
-      {/* <Flex height="90vh" align="center" justify="center" background="white">
-        <Flex direction="column" background="gray.100" p={12} rounded={6} mb={3} color="black">
-          <Center bg='gray.200' w='100%' p={8} rounded={6} mb={6}>
-            <Image src="/img/top.jpg" borderRadius="full" boxSize="200px" alt="picture of title generator" />
-          </Center>
-          <Heading mb={8}>Manga Title Generater</Heading>
-          <form onSubmit={generateTitle}>
-            <Input
-              type="text"
-              name="manga"
-              placeholder="キーワードを入力"
-              value={mangaInput}
-              variant="filled"
-              onChange={(e) => setMangaInput(e.target.value)}
-              mb={6}
-              // プレースホルダーが見えない！後々に要確認！！
-              background="gray.50"
-            />
-            <Input type="submit" mb={6} background="pink" value="タイトルを生成" color="white" />
-          </form>
-        </Flex>
-      </Flex > */}
-
-
       {/* <p>画像のurl:{img_url}</p> */}
       {/* 結果を表示するエリア */}
-      <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
-        {cards.map((card, index) =>
-          <ResultCards key={index} gi={card.gi} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
-        )} </Flex>
+      <Box py={12}>
+        <VStack textAlign="center">
+          <Heading as="h1" fontSize="4xl">
+            出力結果
+          </Heading>
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            textAlign="center"
+            justify="center"
+            spacing={{ base: 4, lg: 10 }}
+            py={10}>
+            {cards.map((card, index) =>
+              <ResultCards key={index} gi={card.gi} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
+            )}
+          </Stack>
+        </VStack>
+      </Box>
+      <Footer></Footer>
     </>
   );
 }
