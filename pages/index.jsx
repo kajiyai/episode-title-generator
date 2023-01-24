@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import { Header, ShareButton, ResultCards, Features, Footer } from "../components/index.js"
-import { Box, VStack, Container, Wrap, WrapItem, Grid, Flex, Stack, HStack, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
-
+import { Box, VStack, Spacer, Container, Wrap, WrapItem, Grid, Flex, Stack, HStack, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
 
 export default function Home() {
   // useStateを使う.APIの返り値
@@ -148,40 +147,12 @@ export default function Home() {
         console.log("img_url_3:", img_url_3)
       };
 
-
-      // console.log("response:", response)
-      // console.log('b')
-      // const data = await response.json();
-      // console.log('c')
-      // if (response.status !== 200) {
-      //   throw (
-      //     data.error ||
-      //     new Error(`Request failed with status ${response.status}`)
-      //   );
-      // }
-      // console.log("response.status", response.status)
-      // // console.log("response", response);
-      // console.log("data", data);
-      // console.log("data.result[0].url", data.result[0].url);
-      // console.log("d")
-
-      // // console.log("response.data.data[0].url:", response.data.data[0].url);
-      // console.log("img_url:", img_url)
-      // console.log("dd")
-      // setUrl(data.result[0].url);
-
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error("通信に失敗したよ", error);
       alert(error.message);
     }
   }
-
-
-  //img_urlの呼び出し
-  // (async () => {
-  //   console.log("img_url", img_url);
-  // })();
 
 
   // 変数resをjson形式で定義
@@ -204,9 +175,9 @@ export default function Home() {
 
   // 変数tweet_textをjson形式で定義
   let tweet_text = {};
-  tweet_text["first"] = `私が作る漫画のタイトルは「${res.first}」です。`;
-  tweet_text["second"] = `私が作る漫画のタイトルは「${res.second}」です。`;
-  tweet_text["third"] = `私が作る漫画のタイトルは「${res.third}」です。`;
+  tweet_text["first"] = ` 私が作る漫画のタイトルは「${res.first}」です。`;
+  tweet_text["second"] = ` 私が作る漫画のタイトルは「${res.second}」です。`;
+  tweet_text["third"] = ` 私が作る漫画のタイトルは「${res.third}」です。`;
 
 
   console.log("a1:");
@@ -244,8 +215,8 @@ export default function Home() {
             direction={{ base: 'column', md: 'row' }}
             textAlign="center"
             justify="center"
-            spacing={{ base: 4, lg: 10 }}
-            py={10}>
+            spacing={{ base: 4, lg: 10, }}
+            py={16}>
             {cards.map((card, index) =>
               <ResultCards key={index} gi={card.gi} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
             )}

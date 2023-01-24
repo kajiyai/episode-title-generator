@@ -7,7 +7,7 @@ import {
     useColorModeValue,
     VisuallyHidden,
 } from '@chakra-ui/react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { ReactNode } from 'react';
 
 const SocialButton = (props) => {
@@ -46,16 +46,16 @@ export default function SmallWithSocial() {
                 spacing={4}
                 justify={{ base: 'center', md: 'space-between' }}
                 align={{ base: 'center', md: 'center' }}>
-                <Text>© 2022 Chakra Templates. All rights reserved</Text>
+                <Text>© 2022 kajiyai All RightsRreserved</Text>
                 <Stack direction={'row'} spacing={6}>
-                    <SocialButton label={'Twitter'} href={'#'}>
+                    <SocialButton label={'Twitter'} href={'https://twitter.com/_kajiyai'}>
                         <FaTwitter />
                     </SocialButton>
-                    <SocialButton label={'YouTube'} href={'#'}>
+                    <SocialButton label={'YouTube'} href={'https://www.youtube.com/@kajiyai/featured'}>
                         <FaYoutube />
                     </SocialButton>
-                    <SocialButton label={'Instagram'} href={'#'}>
-                        <FaInstagram />
+                    <SocialButton label={'GitHub'} href={'https://github.com/kajiyai/manga-title-generator'}>
+                        <FaGithub />
                     </SocialButton>
                 </Stack>
             </Container>
