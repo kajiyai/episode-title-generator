@@ -263,9 +263,9 @@ export default function Home() {
       {/* <p>画像のurl:{img_url}</p> */}
       {/* 結果を表示するエリア */}
       <Flex height="60vh" align="center" justify="space-around" direction="row" background="gray.50" p={8} m={8}>
-        {cards.map(card => (
-          <ResultCards gi={card.gi} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
-        ))} </Flex>
+        {cards.map((card, index) =>
+          <ResultCards key={index} gi={card.gi} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
+        )} </Flex>
     </>
   );
 }

@@ -1,5 +1,7 @@
 // import { Text, Image, Card, CardHeader, CardBody, CardFooter, Button } from "@chakra-ui/react";
 import { ShareButton } from "./index.js"
+//import local img
+import img from '../public/img/noimage.jpg'
 
 // const ResultCards = (props) => {
 //   return (
@@ -42,12 +44,13 @@ import {
   Text,
   Stack,
   Image,
-  Button
+  Button,
+  Flex
 } from '@chakra-ui/react';
 
 export default function ResultCards(props) {
   return (
-    <Center py={12}>
+    <Flex>
       <Box
         role={'group'}
         p={6}
@@ -86,7 +89,7 @@ export default function ResultCards(props) {
             width={282}
             objectFit={'cover'}
             src={props.url}
-            alt="画像を作ってね！"
+            fallbackSrc='https://via.placeholder.com/256'
           />
         </Box>
         <Stack pt={10} align={'center'}>
@@ -116,6 +119,6 @@ export default function ResultCards(props) {
           <ShareButton tweet={props.tweet}></ShareButton>
         </Stack>
       </Box>
-    </Center>
+    </Flex>
   );
 }
