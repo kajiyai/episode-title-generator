@@ -110,6 +110,7 @@ export default function Features(props) {
                             <Text fontSize='md'>キーワードを入力してタイトル生成ボタンを押すと、イケてる(?)漫画のタイトルが生成されます</Text>
                             <Text fontSize='md'>プロンプト生成ボタンを押すと、画像生成用の呪文が生成されます</Text>
                             <Text fontSize='md'>画像生成ボタンを押すと、タイトルに合った(?)画像が生成されます</Text>
+                            <Text fontSize='md'>※※エラーが出ても、何回か試すと成功します※※</Text>
                         </Stack>
                     </Box>
                     {/* <Image

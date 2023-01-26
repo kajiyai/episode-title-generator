@@ -1,8 +1,6 @@
-import Head from "next/head";
 import { useState, useEffect } from "react";
-import { Header, ShareButton, ResultCards, Features, Footer } from "../components/index.js"
-import { Box, VStack, Spacer, Container, Wrap, WrapItem, Grid, Flex, Stack, HStack, Heading, Input, useColorMode, useColorModeValue, Center, Image, Button } from "@chakra-ui/react";
-import generatePrompt from "./api/generatePrompt.js";
+import { Header, ResultCards, Features, Footer } from "../components/index.js"
+import { Box, VStack, Stack, Heading } from "@chakra-ui/react";
 
 export default function Home() {
   // useStateを使う.APIの返り値
