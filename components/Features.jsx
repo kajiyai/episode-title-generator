@@ -11,12 +11,19 @@ import {
     useColorModeValue,
     Input,
     Box,
+    Button,
+    HStack,
+    IconButton,
 } from '@chakra-ui/react';
 import {
     IoAnalyticsSharp,
     IoLogoBitcoin,
     IoSearchSharp,
 } from 'react-icons/io5';
+import {
+    BsMoonFill,
+    BsSunFill
+} from 'react-icons/bs'
 import { ReactElement } from 'react';
 
 
@@ -42,17 +49,25 @@ export default function Features(props) {
         <Container maxW={'5xl'} py={12}>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 <Stack spacing={4}>
-                    <Text
-                        textTransform={'uppercase'}
-                        color={'blue.400'}
-                        fontWeight={600}
-                        fontSize={'sm'}
-                        bg={useColorModeValue('blue.50', 'blue.900')}
-                        p={2}
-                        alignSelf={'flex-start'}
-                        rounded={'md'}>
-                        OPENAI
-                    </Text>
+                    <HStack>
+                        <Text
+                            textTransform={'uppercase'}
+                            color={'blue.400'}
+                            fontWeight={600}
+                            fontSize={'sm'}
+                            bg={useColorModeValue('blue.50', 'blue.900')}
+                            p={2}
+                            alignSelf={'flex-start'}
+                            rounded={'md'}>
+                            OPENAI
+                        </Text>
+                        <IconButton
+                            // _focus={{_focus: "none"}} //周りの青いアウトラインが気になる場合に消す方法
+                            aria-label="DarkMode Switch"
+                            icon={props.cm === 'light' ? <BsMoonFill /> : <BsSunFill />}
+                            onClick={props.tcm}
+                        />
+                    </HStack>
                     <Heading>MTG</Heading>
                     <Text color={'gray.500'} fontSize={'lg'}>
                         あなただけの漫画のタイトルと表紙を生成しよう!!
@@ -110,7 +125,7 @@ export default function Features(props) {
                             <Text fontSize='md'>キーワードを入力してタイトル生成ボタンを押すと、イケてる(?)漫画のタイトルが生成されます</Text>
                             <Text fontSize='md'>プロンプト生成ボタンを押すと、画像生成用の呪文が生成されます</Text>
                             <Text fontSize='md'>画像生成ボタンを押すと、タイトルに合った(?)画像が生成されます</Text>
-                            <Text fontSize='md'>※※エラーが出ても、何回か試すと成功します※※</Text>
+                            <Text fontSize='md'>※※エラーが出たら、2,3回試してみて下さい※※</Text>
                         </Stack>
                     </Box>
                     {/* <Image

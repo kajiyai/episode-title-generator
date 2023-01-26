@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Header, ResultCards, Features, Footer } from "../components/index.js"
-import { Box, VStack, Stack, Heading } from "@chakra-ui/react";
+import { Header, ResultCards, Features, Footer, CaptionCarousel } from "../components/index.js"
+import { Box, VStack, Stack, Heading, IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
+
 
 export default function Home() {
   // useStateを使う.APIの返り値
@@ -12,6 +13,9 @@ export default function Home() {
   const [prompt1, setPrompt1] = useState('プロンプト生成ボタンを押した後に画像生成ボタンを押してね!!');
   const [prompt2, setPrompt2] = useState('プロンプト生成ボタンを押した後に画像生成ボタンを押してね!!');
   const [prompt3, setPrompt3] = useState('プロンプト生成ボタンを押した後に画像生成ボタンを押してね!!');
+
+  // カラーモードを操作する.useColorModeというHooksを使用して表示するアイコンの切り替えも行う
+  const { colorMode, toggleColorMode } = useColorMode("dark")
 
   // タイトル生成ボタンを押した後
   async function generateTitle(event) {
@@ -312,8 +316,9 @@ export default function Home() {
       {/* headタグ内の設定 */}
       <Header></Header>
       {/* Features */}
-      <Features gt={generateTitle} mi={mangaInput} smi={setMangaInput}></Features>
-      {/* <p>画像のurl:{img_url}</p> */}
+      <Features gt={generateTitle} mi={mangaInput} smi={setMangaInput} cm={colorMode} tcm={toggleColorMode}></Features>
+      {/* Carousel */}
+      {/* <CaptionCarousel></CaptionCarousel> */}
       {/* 結果を表示するエリア */}
       <Box py={12}>
         <VStack textAlign="center">
