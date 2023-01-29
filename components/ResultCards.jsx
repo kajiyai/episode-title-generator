@@ -78,7 +78,7 @@ export default function ResultCards(props) {
               colorScheme="blue"
               type="submit"
               value={props.mt}>
-              プロンプト生成
+              呪文生成
             </Button>
           </form>
           <form onSubmit={props.gi}>

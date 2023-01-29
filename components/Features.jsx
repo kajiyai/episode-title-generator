@@ -68,9 +68,9 @@ export default function Features(props) {
                             onClick={props.tcm}
                         />
                     </HStack>
-                    <Heading>MTG</Heading>
+                    <Heading>エピタイ!!</Heading>
                     <Text color={'gray.500'} fontSize={'lg'}>
-                        あなただけの漫画のタイトルと表紙を生成しよう!!
+                        漫画のエピソードタイトルと挿絵を作ろう!!
                     </Text>
                     <Stack
                         spacing={4}
@@ -121,10 +121,11 @@ export default function Features(props) {
                     <Box bg='gray.300' width='100%' rounded={'md'} alignItems='center' justifyContent='center' color='black'>
                         <Stack spacing={3} p={6}>
                             <Text fontSize='3xl'>使い方</Text>
-                            <Text fontSize='lg'>漫画のタイトルと画像をAIと共につくります</Text>
-                            <Text fontSize='md'>キーワードを入力してタイトル生成ボタンを押すと、イケてる(?)漫画のタイトルが生成されます</Text>
-                            <Text fontSize='md'>プロンプト生成ボタンを押すと、画像生成用の呪文が生成されます</Text>
-                            <Text fontSize='md'>画像生成ボタンを押すと、タイトルに合った(?)画像が生成されます</Text>
+                            <Text fontSize='lg'>漫画仕様のエピソードタイトルと挿絵画像をAIと共につくります</Text>
+                            <Text fontSize='md'>キーワードを入力してタイトル生成ボタンを押すと、関連した漫画のタイトルが生成されます</Text>
+                            <Text fontSize='md'>呪文生成ボタンを押すと、画像生成用の呪文が生成されます</Text>
+                            <Text fontSize='md'>画像生成ボタンを押すと、タイトルに合った(??)画像が生成されます</Text>
+                            <Text fontSize='md'>※※呪文生成ボタンを押してから画像生成ボタンを押してみて下さい※※</Text>
                             <Text fontSize='md'>※※エラーが出たら、2,3回試してみて下さい※※</Text>
                         </Stack>
                     </Box>

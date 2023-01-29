@@ -107,7 +107,7 @@ export default function WithSpeechBubbles(props) {
         <Container maxW={'7xl'} py={12}>
             <Accordion defaultIndex={[0]} allowMultiple>
                 <AccordionItem>
-                    <AccordionButton>
+                    <AccordionButton py={4}>
                         <Box as="span" flex='1' textAlign='center' >
                             <Heading as="h3" fontSize="2xl">
                                 使用例
