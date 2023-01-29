@@ -20,8 +20,10 @@ export default function ResultCards(props) {
     <Box
       role={'group'}
       p={8}
+      // 3つ並べるから、もしかしたらmarginは取るべきではない？？
       mb={8}
       minW={'330px'}
+      // 画像生成後にどうにかなるのを要確認
       w={'full'}
       bg={useColorModeValue('white', 'gray.800')}
       boxShadow={'2xl'}

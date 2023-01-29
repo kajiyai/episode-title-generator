@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Header, ResultCards, Features, Footer, CaptionCarousel } from "../components/index.js"
-import { Box, VStack, Stack, Heading, IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Header, ResultCards, Features, Footer, CaptionCarousel, Testimonials } from "../components/index.js"
+import { Box, VStack, Stack, Heading, IconButton, useColorMode, useColorModeValue, Container } from "@chakra-ui/react";
 
 
 export default function Home() {
@@ -13,6 +13,7 @@ export default function Home() {
   const [prompt1, setPrompt1] = useState('プロンプト生成ボタンを押した後に画像生成ボタンを押してね!!');
   const [prompt2, setPrompt2] = useState('プロンプト生成ボタンを押した後に画像生成ボタンを押してね!!');
   const [prompt3, setPrompt3] = useState('プロンプト生成ボタンを押した後に画像生成ボタンを押してね!!');
+
 
   // カラーモードを操作する.useColorModeというHooksを使用して表示するアイコンの切り替えも行う
   const { colorMode, toggleColorMode } = useColorMode("dark")
@@ -319,8 +320,10 @@ export default function Home() {
       <Features gt={generateTitle} mi={mangaInput} smi={setMangaInput} cm={colorMode} tcm={toggleColorMode}></Features>
       {/* Carousel */}
       {/* <CaptionCarousel></CaptionCarousel> */}
+      {/* Testimonials */}
+      <Testimonials></Testimonials>
       {/* 結果を表示するエリア */}
-      <Box py={12}>
+      <Container maxW={'5xl'} py={12}>
         <VStack textAlign="center">
           <Heading as="h1" fontSize="4xl">
             出力結果
@@ -336,7 +339,7 @@ export default function Home() {
             )}
           </Stack>
         </VStack>
-      </Box>
+      </Container>
       <Footer></Footer>
     </>
   );
