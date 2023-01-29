@@ -104,89 +104,92 @@ const TestimonialAvatar = ({
 
 export default function WithSpeechBubbles(props) {
     return (
-        <Accordion defaultIndex={[0]} allowMultiple>
-            <AccordionItem>
-                <h2>
+        <Container maxW={'7xl'} py={12}>
+            <Accordion defaultIndex={[0]} allowMultiple>
+                <AccordionItem>
                     <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                            使用例
+                        <Box as="span" flex='1' textAlign='center' >
+                            <Heading as="h3" fontSize="2xl">
+                                使用例
+                            </Heading>
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>
-                </h2>
-
-                <AccordionPanel p={4}>
-                    <Box bg={useColorModeValue('gray.100', 'gray.700')}>
-                        <Container maxW={'6xl'} py={16} as={Stack} spacing={12}>
-                            <Stack spacing={0} align={'center'}>
-                                <Heading>使用例</Heading>
-                                {/* <Text>We have been working with clients around the world</Text> */}
-                            </Stack>
-                            <Stack
-                                direction={{ base: 'column', md: 'row' }}
-                                spacing={{ base: 10, md: 4, lg: 10 }}>
-                                <Testimonial>
-                                    <TestimonialContent>
-                                        <TestimonialHeading>「王様は犬だった」</TestimonialHeading>
-                                        <TestimonialImage>
-                                            {/* imgのlocalパスを入力する　*/}
-                                            /img/tes1.png
-                                        </TestimonialImage>
-                                        <TestimonialText>
-                                            入力:「犬     王」
-                                        </TestimonialText>
-                                    </TestimonialContent>
-                                    <TestimonialAvatar
-                                        src={
-                                            '/img/kajiyai.jpg'
-                                        }
-                                        name={'kajiyai'}
-                                        title={'developer'}
-                                    />
-                                </Testimonial>
-                                <Testimonial>
-                                    <TestimonialContent>
-                                        <TestimonialHeading>「ホットドッグスライダーズ」</TestimonialHeading>
-                                        <TestimonialImage>
-                                            {/* imgのlocalパスを入力する　*/}
-                                            /img/tes2.png
-                                        </TestimonialImage>
-                                        <TestimonialText>
-                                            入力:「ホットドッグ」
-                                        </TestimonialText>
-                                    </TestimonialContent>
-                                    <TestimonialAvatar
-                                        src={
-                                            '/img/kajiyai.jpg'
-                                        }
-                                        name={'kajiyai'}
-                                        title={'developer'}
-                                    />
-                                </Testimonial>
-                                <Testimonial>
-                                    <TestimonialContent>
-                                        <TestimonialHeading>「ミカンの神秘」</TestimonialHeading>
-                                        <TestimonialImage>
-                                            {/* imgのlocalパスを入力する　*/}
-                                            /img/tes3.png
-                                        </TestimonialImage>
-                                        <TestimonialText>
-                                            入力:「ミカン」
-                                        </TestimonialText>
-                                    </TestimonialContent>
-                                    <TestimonialAvatar
-                                        src={
-                                            '/img/kajiyai.jpg'
-                                        }
-                                        name={'kajiyai'}
-                                        title={'developer'}
-                                    />
-                                </Testimonial>
-                            </Stack>
-                        </Container>
-                    </Box>
-                </AccordionPanel>
-            </AccordionItem>
-        </Accordion>
+                    <AccordionPanel py={4}>
+                        <Box bg={useColorModeValue('gray.100', 'gray.700')}>
+                            <Container maxW={'100%'} py={16} as={Stack} spacing={6} align="center">
+                                <Stack spacing={0} align={'center'} pb={4}>
+                                    <Heading as="h3" fontSize="4xl">
+                                        使用例
+                                    </Heading>
+                                    {/* <Text>We have been working with clients around the world</Text> */}
+                                </Stack>
+                                <Stack
+                                    direction={{ base: 'column', md: 'row' }}
+                                    spacing={{ base: 10, md: 4, lg: 10 }}>
+                                    <Testimonial>
+                                        <TestimonialContent>
+                                            <TestimonialHeading>「王様は犬だった」</TestimonialHeading>
+                                            <TestimonialImage>
+                                                {/* imgのlocalパスを入力する　*/}
+                                                /img/tes1.png
+                                            </TestimonialImage>
+                                            <TestimonialText>
+                                                入力:「犬     王」
+                                            </TestimonialText>
+                                        </TestimonialContent>
+                                        <TestimonialAvatar
+                                            src={
+                                                '/img/kajiyai.jpg'
+                                            }
+                                            name={'kajiyai'}
+                                            title={'developer'}
+                                        />
+                                    </Testimonial>
+                                    <Testimonial>
+                                        <TestimonialContent>
+                                            <TestimonialHeading>「ホットドッグスライダーズ」</TestimonialHeading>
+                                            <TestimonialImage>
+                                                {/* imgのlocalパスを入力する　*/}
+                                                /img/tes2.png
+                                            </TestimonialImage>
+                                            <TestimonialText>
+                                                入力:「ホットドッグ」
+                                            </TestimonialText>
+                                        </TestimonialContent>
+                                        <TestimonialAvatar
+                                            src={
+                                                '/img/kajiyai.jpg'
+                                            }
+                                            name={'kajiyai'}
+                                            title={'developer'}
+                                        />
+                                    </Testimonial>
+                                    <Testimonial>
+                                        <TestimonialContent>
+                                            <TestimonialHeading>「世界最強の葬儀屋」</TestimonialHeading>
+                                            <TestimonialImage>
+                                                {/* imgのlocalパスを入力する　*/}
+                                                /img/tes4.png
+                                            </TestimonialImage>
+                                            <TestimonialText>
+                                                入力:「世界一」
+                                            </TestimonialText>
+                                        </TestimonialContent>
+                                        <TestimonialAvatar
+                                            src={
+                                                '/img/kajiyai.jpg'
+                                            }
+                                            name={'kajiyai'}
+                                            title={'developer'}
+                                        />
+                                    </Testimonial>
+                                </Stack>
+                            </Container>
+                        </Box>
+                    </AccordionPanel>
+                </AccordionItem>
+            </Accordion>
+        </Container >
     );
 }
