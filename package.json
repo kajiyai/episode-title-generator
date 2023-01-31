@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@next/font": "13.1.1",
+    "@prisma/client": "^4.9.0",
     "chakra-ui-carousel": "^1.0.6",
     "dotenv": "^16.0.3",
     "eslint": "8.31.0",
@@ -25,5 +26,8 @@
     "react-icons": "^4.7.1",
     "react-share": "^4.4.1",
     "react-slick": "^0.29.0"
+  },
+  "devDependencies": {
+    "prisma": "^4.9.0"
   }
 }

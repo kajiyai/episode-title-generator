@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Openai {
+  id                Int      @id @default(autoincrement())
+  que               String //クエリ
+  text              String //レスポンスの中身
+  type              Int //0:title 1:prompt 2:image
+  prompt_tokens     Int
+  completion_tokens Int
+  total_tokens      Int
+  created_at        DateTime
+}

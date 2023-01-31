@@ -11,7 +11,9 @@ import {
   Button,
   Flex,
   VStack,
-  StackDivider
+  HStack,
+  StackDivider,
+  useClipboard
 } from '@chakra-ui/react';
 
 export default function ResultCards(props) {
@@ -73,6 +75,7 @@ export default function ResultCards(props) {
           spacing={4}
           align='center'
         >
+
           <form onSubmit={props.gp}>
             <Button
               colorScheme="blue"
@@ -81,6 +84,7 @@ export default function ResultCards(props) {
               呪文生成
             </Button>
           </form>
+
           <form onSubmit={props.gi}>
             <Button
               colorScheme="blue"
@@ -92,10 +96,19 @@ export default function ResultCards(props) {
           <Text>
             {props.p}
           </Text>
+          {/* 
+          <Button
+            onClick={props.oc}
+            value={props.p}
+            colorScheme="blue"
+          > 
+            {props.hc ? "Copied!" : "Copy"}
+          </Button>
+          */}
           <TwitterShareButton
             url={"https://manga-title-generator-4vwn.vercel.app/"}
             title={props.tweet}
-            hashtags={["openai", "mtg", "api", "クソアプリ"]}
+            hashtags={["openai", "mtg", "api"]}
           >
             <TwitterIcon size={40} round={true} />
           </TwitterShareButton>

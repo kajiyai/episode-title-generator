@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Header, ResultCards, Features, Footer, CaptionCarousel, Testimonials } from "../components/index.js"
-import { Box, VStack, Stack, Heading, IconButton, useColorMode, useColorModeValue, Container } from "@chakra-ui/react";
+import { Box, VStack, Stack, Heading, IconButton, useColorMode, useColorModeValue, useClipboard, Container } from "@chakra-ui/react";
 
 
 export default function Home() {
@@ -17,6 +17,11 @@ export default function Home() {
 
   // カラーモードを操作する.useColorModeというHooksを使用して表示するアイコンの切り替えも行う
   const { colorMode, toggleColorMode } = useColorMode("dark")
+
+  // 呪文をコピーするボタンのためのHooks
+  const { onCopy1, hasCopied1 } = useClipboard(prompt1);
+  const { onCopy2, hasCopied2 } = useClipboard(prompt2);
+  const { onCopy3, hasCopied3 } = useClipboard(prompt3);
 
   // タイトル生成ボタンを押した後
   async function generateTitle(event) {
@@ -306,10 +311,34 @@ export default function Home() {
   console.log("a4:");
 
   let cards = [
-    { gp: generatePrompt(1), gi: generateImage(1), p: prompt1, mt: res.first, url: img_url_1, tweet: tweet_text.first, que: mangaInput },
-    { gp: generatePrompt(2), gi: generateImage(2), p: prompt2, mt: res.second, url: img_url_2, tweet: tweet_text.second, que: mangaInput },
-    { gp: generatePrompt(3), gi: generateImage(3), p: prompt3, mt: res.third, url: img_url_3, tweet: tweet_text.third, que: mangaInput },
+    { gp: generatePrompt(1), gi: generateImage(1), p: prompt1, mt: res.first, url: img_url_1, tweet: tweet_text.first, que: mangaInput, oc: onCopy1, hc: hasCopied1 },
+    { gp: generatePrompt(2), gi: generateImage(2), p: prompt2, mt: res.second, url: img_url_2, tweet: tweet_text.second, que: mangaInput, oc: onCopy2, hc: hasCopied2 },
+    { gp: generatePrompt(3), gi: generateImage(3), p: prompt3, mt: res.third, url: img_url_3, tweet: tweet_text.third, que: mangaInput, oc: onCopy3, hc: hasCopied3 },
   ]
+
+  useEffect(() => {
+    fetch('/api/testdb')
+      .then((res) => res.json())
+      .then(console.log);
+  }, []);
+
+  // コンストラクタDate
+  const now = new Date();
+  // 現在時刻を取得
+  const str_now = now.getUTCFullYear()
+    + '-' + ('0' + (now.getUTCMonth() + 1)).slice(-2)
+    + '-' + ('0' + now.getUTCDate()).slice(-2)
+    + 'T' + ('0' + now.getUTCHours()).slice(-2)
+    + ':' + ('0' + now.getUTCMinutes()).slice(-2)
+    + ':' + ('0' + now.getUTCSeconds()).slice(-2)
+    + '.000Z';
+  // 現在時刻の日付の00:00:00を取得
+  const str_pre = now.getUTCFullYear()
+    + '-' + ('0' + (now.getUTCMonth() + 1)).slice(-2)
+    + '-' + ('0' + now.getUTCDate()).slice(-2)
+    + 'T00:00:00.000Z'
+  // console.log("現在時刻:", str_now);
+  // console.log("現在時刻の日付の0時:", str_pre);
 
 
   return (
@@ -335,7 +364,7 @@ export default function Home() {
             spacing={{ base: 4, lg: 10, }}
             py={16}>
             {cards.map((card, index) =>
-              <ResultCards key={index} gp={card.gp} gi={card.gi} p={card.p} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que}></ResultCards>
+              <ResultCards key={index} gp={card.gp} gi={card.gi} p={card.p} mt={card.mt} url={card.url} tweet={card.tweet} que={card.que} oc={card.oc} hc={card.hc}></ResultCards>
             )}
           </Stack>
         </VStack>
