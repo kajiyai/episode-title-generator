@@ -11,7 +11,7 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Openai {
+model Openai_log {
   id                Int      @id @default(autoincrement())
   que               String //クエリ
   text              String //レスポンスの中身

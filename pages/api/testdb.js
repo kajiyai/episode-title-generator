@@ -1,5 +1,5 @@
 // DBの値を表示するAPI
-import { Openai, Prisma, PrismaClient } from "@prisma/client";
+import { Openai_log, Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const now = new Date();
 
@@ -44,7 +44,7 @@ console.log("str_pre:", str_pre);
 export default async function handler(req, res) {
   /* openaiのレコードのカウントを取得 */
   console.log("a");
-  const o_log_count = await prisma.openai.count({
+  const o_log_count = await prisma.openai_log.count({
     // 0時--現在時刻までのレコードをカウント
     where: {
       AND: {
