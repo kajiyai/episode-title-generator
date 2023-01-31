@@ -13,8 +13,8 @@ datasource db {
 
 model Openai_log {
   id                Int      @id @default(autoincrement())
-  que               String //クエリ
-  text              String //レスポンスの中身
+  que               String   @db.VarChar(1000) //クエリ
+  text              String   @db.VarChar(1000) //レスポンスの中身
   type              Int //0:title 1:prompt 2:image
   prompt_tokens     Int
   completion_tokens Int

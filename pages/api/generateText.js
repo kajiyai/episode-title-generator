@@ -1,4 +1,34 @@
 import { Configuration, OpenAIApi } from "openai";
+// DBの値を表示するAPI
+import { Openai_log, Prisma, PrismaClient } from "@prisma/client";
+import { IoAlarmOutline } from "react-icons/io5";
+const prisma = new PrismaClient();
+const now = new Date();
+
+// 現在時刻を取得
+const str_now =
+  now.getUTCFullYear() +
+  "-" +
+  ("0" + (now.getUTCMonth() + 1)).slice(-2) +
+  "-" +
+  ("0" + now.getUTCDate()).slice(-2) +
+  "T" +
+  ("0" + now.getUTCHours()).slice(-2) +
+  ":" +
+  ("0" + now.getUTCMinutes()).slice(-2) +
+  ":" +
+  ("0" + now.getUTCSeconds()).slice(-2) +
+  ".000Z";
+
+// 現在の日付の00:00:00を取得
+const str_pre =
+  now.getUTCFullYear() +
+  "-" +
+  ("0" + (now.getUTCMonth() + 1)).slice(-2) +
+  "-" +
+  ("0" + now.getUTCDate()).slice(-2) +
+  // " 00:00:00";
+  "T00:00:00.000Z";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -27,15 +57,51 @@ export default async function (req, res) {
   }
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(manga),
-      temperature: 0.8,
-      max_tokens: 150,
+    // 0時--現在時刻までのレコードをカウント
+    const o_log_count = await prisma.openai_log.count({
+      where: {
+        AND: {
+          created_at: {
+            lt: str_now,
+          },
+          created_at: {
+            gt: str_pre,
+          },
+        },
+      },
     });
-    res.status(200).json({ result: completion.data.choices[0].text });
-    // 出力の確認
-    console.log("resultに入っているcompletion.dataの中身::", completion.data);
+    // o_log_countが100以下なら
+    if (o_log_count <= 100) {
+      const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: generatePrompt(manga),
+        temperature: 0.8,
+        max_tokens: 150,
+      });
+      res.status(200).json({ result: completion.data.choices[0].text });
+      // 出力の確認
+      // DBに値を格納
+      const openai_log = await prisma.openai_log.create({
+        data: {
+          que: manga,
+          text: completion.data.choices[0].text,
+          type: 0,
+          prompt_tokens: completion.data.usage.prompt_tokens,
+          completion_tokens: completion.data.usage.completion_tokens,
+          total_tokens: completion.data.usage.total_tokens,
+          created_at: str_now,
+        },
+      });
+      console.log("resultに入っているcompletion.dataの中身::", completion.data);
+    } else {
+      // エラーの処理
+      console.error();
+      res.status(500).json({
+        error: {
+          message: "1日の使用上限に達しました",
+        },
+      });
+    }
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {

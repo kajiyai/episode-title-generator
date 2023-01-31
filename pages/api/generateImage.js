@@ -74,7 +74,7 @@ export default async function (req, res) {
         },
       },
     });
-    // レコードが100個よりも多い場合
+    // レコードが100個よりも少ない場合
     if (o_log_count <= 100) {
       // 画像の生成
       const response = await openai.createImage({
@@ -96,7 +96,7 @@ export default async function (req, res) {
       const openai_log = await prisma.openai_log.create({
         data: {
           que: que,
-          text: response.data.data.url,
+          text: response.data.data[0].url,
           type: 2,
           prompt_tokens: 0,
           completion_tokens: 0,
@@ -105,6 +105,14 @@ export default async function (req, res) {
         },
       });
       console.log(openai_log);
+    } else {
+      // エラーの処理
+      console.error();
+      res.status(500).json({
+        error: {
+          message: "1日の使用上限に達しました",
+        },
+      });
     }
   } catch (error) {
     if (error.response) {
