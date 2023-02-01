@@ -291,9 +291,9 @@ export default function Home() {
 
   // 変数tweet_textをjson形式で定義
   let tweet_text = {};
-  tweet_text["first"] = ` 私が作る漫画のタイトルは「${res.first}」です。`;
-  tweet_text["second"] = ` 私が作る漫画のタイトルは「${res.second}」です。`;
-  tweet_text["third"] = ` 私が作る漫画のタイトルは「${res.third}」です。`;
+  tweet_text["first"] = ` 私が作ったエピソードタイトルは「${res.first}」です。`;
+  tweet_text["second"] = ` 私が作ったエピソードタイトルは「${res.second}」です。`;
+  tweet_text["third"] = ` 私が作ったエピソードタイトルは「${res.third}」です。`;
 
 
   console.log("a1:");

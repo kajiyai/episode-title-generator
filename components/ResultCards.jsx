@@ -106,9 +106,9 @@ export default function ResultCards(props) {
           </Button>
           */}
           <TwitterShareButton
-            url={"https://manga-title-generator-4vwn.vercel.app/"}
+            url={"https://episode-title-generator.vercel.app/"}
             title={props.tweet}
-            hashtags={["openai", "mtg", "api"]}
+            hashtags={["openai", "AI", "api", "GPT3"]}
           >
             <TwitterIcon size={40} round={true} />
           </TwitterShareButton>
