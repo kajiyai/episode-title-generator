@@ -57,8 +57,6 @@ export default function Home() {
     event.preventDefault();
     try {
       if (index == 1) {
-        console.log('index:', 1)
-        console.log('a')
         const response = await fetch("/api/generatePrompt", {
           method: "POST",
           headers: {
@@ -67,32 +65,16 @@ export default function Home() {
           // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
           body: JSON.stringify({ title: res.first }),
         });
-        console.log("response:", response)
-        console.log('b')
         const data = await response.json();
-        console.log('c')
         if (response.status !== 200) {
           throw (
             data.error ||
             new Error(`Request failed with status ${response.status}`)
           );
         }
-        console.log("response.status", response.status)
-        // console.log("response", response);
-        console.log("data", data);
-        console.log("data.result[0].url", data.result[0].url);
-        console.log("d")
-
-        // console.log("response.data.data[0].url:", response.data.data[0].url);
-        console.log("prompt1:", prompt1)
-        console.log("dd")
-        console.log("prompt1:", prompt1)
         setPrompt1(data.result);
-        console.log("prompt1:", prompt1)
 
       } else if (index == 2) {
-        console.log('index:', 2)
-        console.log('a')
         const response = await fetch("/api/generatePrompt", {
           method: "POST",
           headers: {
@@ -101,30 +83,17 @@ export default function Home() {
           // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
           body: JSON.stringify({ title: res.second }),
         });
-        console.log("response:", response)
-        console.log('b')
         const data = await response.json();
-        console.log('c')
         if (response.status !== 200) {
           throw (
             data.error ||
             new Error(`Request failed with status ${response.status}`)
           );
         }
-        console.log("response.status", response.status)
-        // console.log("response", response);
-        console.log("data", data);
-        console.log("d")
 
-        // console.log("response.data.data[0].url:", response.data.data[0].url);
-        console.log("prompt2:", prompt2)
-        console.log("dd")
         setPrompt2(data.result);
-        console.log("prompt2:", prompt2)
         return { prompt2: data.result }
       } else {
-        console.log('index:', 3)
-        console.log('a')
         const response = await fetch("/api/generatePrompt", {
           method: "POST",
           headers: {
@@ -133,26 +102,14 @@ export default function Home() {
           // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
           body: JSON.stringify({ title: res.third }),
         });
-        console.log("response:", response)
-        console.log('b')
         const data = await response.json();
-        console.log('c')
         if (response.status !== 200) {
           throw (
             data.error ||
             new Error(`Request failed with status ${response.status}`)
           );
         }
-        console.log("response.status", response.status)
-        // console.log("response", response);
-        console.log("data", data);
-        console.log("d")
-
-        // console.log("response.data.data[0].url:", response.data.data[0].url);
-        console.log("prompt3:", prompt3)
-        console.log("dd")
         setPrompt3(data.result);
-        console.log("prompt3:", prompt3)
         return { prompt3: data.result }
       }
     } catch (error) {
@@ -167,8 +124,6 @@ export default function Home() {
     event.preventDefault();
     try {
       if (index == 1) {
-        console.log("prompt1:", prompt1)
-        console.log('a')
         const response = await fetch("/api/generateImage", {
           method: "POST",
           headers: {
@@ -177,30 +132,16 @@ export default function Home() {
           // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
           body: JSON.stringify({ que: prompt1 }),
         });
-        console.log("response:", response)
-        console.log('b')
         const data = await response.json();
-        console.log('c')
         if (response.status !== 200) {
           throw (
             data.error ||
             new Error(`Request failed with status ${response.status}`)
           );
         }
-        console.log("response.status", response.status)
-        // console.log("response", response);
-        console.log("data", data);
-        console.log("data.result[0].url", data.result[0].url);
-        console.log("d")
 
-        // console.log("response.data.data[0].url:", response.data.data[0].url);
-        console.log("img_url1:", img_url_1)
-        console.log("dd")
         setUrl1(data.result[0].url);
-        console.log("img_url1:", img_url_1)
       } else if (index == 2) {
-        console.log('index:', 2)
-        console.log('a')
         const response = await fetch("/api/generateImage", {
           method: "POST",
           headers: {
@@ -209,30 +150,15 @@ export default function Home() {
           // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
           body: JSON.stringify({ que: prompt2 }),
         });
-        console.log("response:", response)
-        console.log('b')
         const data = await response.json();
-        console.log('c')
         if (response.status !== 200) {
           throw (
             data.error ||
             new Error(`Request failed with status ${response.status}`)
           );
         }
-        console.log("response.status", response.status)
-        // console.log("response", response);
-        console.log("data", data);
-        console.log("data.result[0].url", data.result[0].url);
-        console.log("d")
-
-        // console.log("response.data.data[0].url:", response.data.data[0].url);
-        console.log("img_url_2:", img_url_2)
-        console.log("dd")
         setUrl2(data.result[0].url);
-        console.log("img_url_2:", img_url_2)
       } else {
-        console.log('index:', 3)
-        console.log('a')
         const response = await fetch("/api/generateImage", {
           method: "POST",
           headers: {
@@ -241,27 +167,14 @@ export default function Home() {
           // que:generateImage.jsの中の変数 プロンプトはres.firstを使用
           body: JSON.stringify({ que: prompt3 }),
         });
-        console.log("response:", response)
-        console.log('b')
         const data = await response.json();
-        console.log('c')
         if (response.status !== 200) {
           throw (
             data.error ||
             new Error(`Request failed with status ${response.status}`)
           );
         }
-        console.log("response.status", response.status)
-        // console.log("response", response);
-        console.log("data", data);
-        console.log("data.result[0].url", data.result[0].url);
-        console.log("d")
-
-        // console.log("response.data.data[0].url:", response.data.data[0].url);
-        console.log("img_url_3:", img_url_3)
-        console.log("dd")
         setUrl3(data.result[0].url);
-        console.log("img_url_3:", img_url_3)
       }
     } catch (error) {
       // Consider implementing your own error handling logic here
@@ -277,7 +190,6 @@ export default function Home() {
   res["second"] = "";
   res["third"] = "";
 
-  console.log("res_b:", res)
 
   // 変数resにAPIの返り値resultを代入する
   if (result !== undefined) {
@@ -287,28 +199,12 @@ export default function Home() {
     res = JSON.parse(jsonString2);
   }
 
-  console.log("res:", res)
-
   // 変数tweet_textをjson形式で定義
   let tweet_text = {};
   tweet_text["first"] = ` 私が作ったエピソードタイトルは「${res.first}」です。`;
   tweet_text["second"] = ` 私が作ったエピソードタイトルは「${res.second}」です。`;
   tweet_text["third"] = ` 私が作ったエピソードタイトルは「${res.third}」です。`;
 
-
-  console.log("a1:");
-  // 生成した画像のurlを格納する変数を定義
-  console.log("img_url_1", img_url_1);
-  console.log("img_url_2", img_url_2);
-  console.log("img_url_3", img_url_3);
-  console.log("prompt1:", prompt1)
-  console.log("prompt2:", prompt2)
-  console.log("prompt3:", prompt3)
-  console.log("a2:");
-  console.log("result:", result);
-  console.log("a3:");
-  console.log("res:", res);
-  console.log("a4:");
 
   let cards = [
     { gp: generatePrompt(1), gi: generateImage(1), p: prompt1, mt: res.first, url: img_url_1, tweet: tweet_text.first, que: mangaInput, oc: onCopy1, hc: hasCopied1 },
@@ -318,8 +214,7 @@ export default function Home() {
 
   useEffect(() => {
     fetch('/api/testdb')
-      .then((res) => res.json())
-      .then(console.log);
+      .then((res) => res.json());
   }, []);
 
   // コンストラクタDate
@@ -337,8 +232,7 @@ export default function Home() {
     + '-' + ('0' + (now.getUTCMonth() + 1)).slice(-2)
     + '-' + ('0' + now.getUTCDate()).slice(-2)
     + 'T00:00:00.000Z'
-  // console.log("現在時刻:", str_now);
-  // console.log("現在時刻の日付の0時:", str_pre);
+
 
 
   return (

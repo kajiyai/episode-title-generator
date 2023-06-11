@@ -92,7 +92,6 @@ export default async function (req, res) {
           created_at: str_now,
         },
       });
-      console.log("resultに入っているcompletion.dataの中身::", completion.data);
     } else {
       // エラーの処理
       console.error();

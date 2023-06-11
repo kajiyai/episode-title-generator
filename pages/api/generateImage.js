@@ -48,7 +48,6 @@ export default async function (req, res) {
     });
     return;
   }
-
   const que = req.body.que || "";
   if (que.trim().length === 0) {
     res.status(400).json({
@@ -60,7 +59,6 @@ export default async function (req, res) {
   }
 
   try {
-    console.log("a");
     // 0時--現在時刻までのレコードをカウント
     const o_log_count = await prisma.openai_log.count({
       where: {
@@ -83,14 +81,8 @@ export default async function (req, res) {
         size: "256x256",
       });
       // API通信用
-      // const response = "dummy text";
-      console.log("b");
-      console.log("que:", que);
-      console.log("response.data:", response.data);
-      console.log("c");
       // index.jsxへ返す内容
       res.status(200).json({ result: response.data.data });
-      console.log("d");
 
       // DBに値を格納
       const openai_log = await prisma.openai_log.create({
@@ -104,7 +96,6 @@ export default async function (req, res) {
           created_at: str_now,
         },
       });
-      console.log(openai_log);
     } else {
       // エラーの処理
       console.error();
@@ -116,14 +107,7 @@ export default async function (req, res) {
     }
   } catch (error) {
     if (error.response) {
-      console.log("e");
-      console.log(error.response.status);
-      console.log("f");
-      console.log(error.response.data);
-      console.log("g");
     } else {
-      console.log(error.message);
-      console.log("h");
     }
   }
 }

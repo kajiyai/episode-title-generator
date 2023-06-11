@@ -31,19 +31,9 @@ const str_pre =
 // Data型にしてみたが、文字列のまま比較可能だった。
 // const dt_now = Date.parse(str_now);
 // const dt_pre = Date.parse(str_pre);
-// console.log(dt_now);
-// console.log(dt_pre);
-
-console.log("str_now:", typeof str_now);
-console.log("str_pre:", typeof str_pre);
-console.log("dt_now:", typeof dt_now);
-console.log("dt_pre:", typeof dt_pre);
-console.log("str_now:", str_now);
-console.log("str_pre:", str_pre);
 
 export default async function handler(req, res) {
   /* openaiのレコードのカウントを取得 */
-  console.log("a");
   const o_log_count = await prisma.openai_log.count({
     // 0時--現在時刻までのレコードをカウント
     where: {
@@ -58,14 +48,10 @@ export default async function handler(req, res) {
     },
   });
 
-  console.log(o_log_count);
   // o_log_countが100なら
   if (o_log_count <= 100) {
-    console.log(o_log_count);
-    console.log("b");
     res.status(200).json(o_log_count);
   }
-  console.log("c");
 }
 
 // DBに値を保存するAPI
