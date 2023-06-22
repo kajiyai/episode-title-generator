@@ -1,3 +1,9 @@
+## TODO List
+
+- [ ] ボタン押下 →API から値が返るまでボタンを非活性にする
+- [ ] Vercel のタイムアウトを解決する
+- [ ] ローディングの対応
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
