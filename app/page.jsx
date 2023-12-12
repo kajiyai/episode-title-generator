@@ -1,5 +1,7 @@
+"use client"
+
 import { useState, useEffect } from "react";
-import { Header, ResultCards, Features, Footer, CaptionCarousel, Testimonials } from "../components/index.js"
+import { Header, ResultCards, Features, Footer, CaptionCarousel, Testimonials } from "./components/index.js"
 import { Box, VStack, Stack, Heading, IconButton, useColorMode, useColorModeValue, useClipboard, Container } from "@chakra-ui/react";
 
 
@@ -232,7 +234,6 @@ export default function Home() {
     + '-' + ('0' + (now.getUTCMonth() + 1)).slice(-2)
     + '-' + ('0' + now.getUTCDate()).slice(-2)
     + 'T00:00:00.000Z'
-
 
 
   return (
